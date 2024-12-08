@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+</head>
+<body>
+    <h1>Chat</h1>
+    {% if current_user.is_authenticated %}
+        <form action="{{ url_for('send_message') }}" method="POST">
+            <input type="text" name="content" placeholder="Type your message">
+            <button type="submit">Send</button>
+        </form>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+    <ul>
+        {% for message in messages %}
+            <li><strong>{{ message.user_id }}:</strong> {{ message.content }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
